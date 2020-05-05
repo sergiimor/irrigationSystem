@@ -52,9 +52,9 @@ class Humidity(Sensor):
 if __name__ == "__main__":
     while True:
         tm = Temperatura("Temperatura")
-        publish.single("sensors", tm, hostname="127.0.0.1")
+        #publish.single("sensors", tm, hostname="127.0.0.1")
         print (tm)
         hm = Humidity ("Humitat")
         print (hm)
-        publish.single("sensors", hm, hostname="127.0.0.1")
+        #publish.single("sensors", hm, hostname="127.0.0.1")
         time.sleep(5)
