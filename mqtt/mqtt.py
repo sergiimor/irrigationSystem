@@ -22,4 +22,8 @@ client.connect("iot.eclipse.org", 3306, 60)
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
-client.loop_forever()
+while (True):
+    print("Hola crack")
+    client.loop_forever()
+
+
