@@ -42,10 +42,12 @@ def handle(msg):
 			bot.sendMessage(chat_id, str("Cerrando "))
 			GPIO.output(releCtrl, False)
 			changeReleState (releStatus)
+			print "is releStatus is true" + releStatus
 		else:
 			bot.sendMessage(chat_id, str("Abriendo "))
 			GPIO.output(releCtrl, True)
 			changeReleState (releStatus)
+			print "is not releStatus is true" + releStatus
 # Insert your telegram token below
 bot = telepot.Bot('1075608346:AAGw8vhREx5WAMmV3aQpclk5yKjYWzn9qiI')
 print (bot.getMe())
