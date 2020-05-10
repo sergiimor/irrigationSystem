@@ -8,13 +8,8 @@ import main as pr
 releCtrl = 21
 
 #Rele OFF state
-releStatus = 0 
+releStatus = False 
 now = datetime.datetime.now() # Getting date and time
-
-a,temperatura=sensor_tm.split(":")
-
-sensor_hm=str(pr.Humidity("Humitat"))
-a,humitat=sensor_hm.split(":")
 
 GPIO.setmode(GPIO.BCM)      # Use Board pin numbering
 GPIO.setup(releCtrl, GPIO.OUT) # Declaring the GPIO 21 as output pin
@@ -41,19 +36,16 @@ def handle(msg):
     elif command == '/humitat':
 		sensor_hm=str(pr.Humidity("Humitat"))
 		a,humitat=sensor_hm.split(":")
-        bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
+	        bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
     elif command == '/rele':
-		if (releStatus == 0)
+		if not releStatus:
 			bot.sendMessage(chat_id, str("Cerrando "))
 			GPIO.output(releCtrl, False)
-		else
+			releStatus = True
+		else:
 			bot.sendMessage(chat_id, str("Abriendo "))
 			GPIO.output(releCtrl, True)
-			
-    elif command == '/green_0':
-        bot.sendMessage(chat_id, str("Green led is OFF"))
-        GPIO.output(green_led_pin, False)
-
+			releStatus =  False
 # Insert your telegram token below
 bot = telepot.Bot('1075608346:AAGw8vhREx5WAMmV3aQpclk5yKjYWzn9qiI')
 print (bot.getMe())

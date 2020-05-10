@@ -3,7 +3,13 @@ import paho.mqtt.client as mqtt
 from influxdb import InfluxDBClient
 import main as pr
 
-idb = InfluxDBClient(database="sensors")
+MQTT_ADDRESS = '127.0.0.1'
+MQTT_TOPIC = 'sensor'
+
+INFLUXDB_DATABASE = "sensor"
+
+
+idb = InfluxDBClient(database="INFLUXDB_DATABASE")
 
 jsondata = [{
     "measurement": "",
@@ -51,15 +57,14 @@ jsondata = [{
 
 sensor_tm = str(pr.Temperatura("Temperatura"))
 a, temperatura = sensor_tm.split(":")
-print(temperatura)
+print("Hola" + temperatura)
 
 sensor_hm = str(pr.Humidity("Humitat"))
 a, humitat = sensor_hm.split(":")
 
-def connecta(client, userdata, flags, rc):
-    print
-    "Connected: " + str(rc)
-    client.subscribe("sensor")
+def on_connect(client, userdata, flags, rc):
+    print "Connected: " + str(rc) client.subscribe("sensor")
+	client.subscribe("sensor")
 
 
 def missatge(client, userdata, msg):
@@ -86,7 +91,7 @@ client = mqtt.Client()
 client.on_connect = connecta
 client.on_message = missatge
 
-client.connect("127.0.0.1", 3306, 60)
+client.connect(MQTT_ADDRESS, 3306, 60)
 
 while True:
     client.loop()
