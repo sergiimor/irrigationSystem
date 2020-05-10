@@ -37,11 +37,11 @@ def handle(msg):
     elif command == '/temperature':
 		sensor_tm=str(pr.Temperatura("Temperatura"))
 		a,temperatura=sensor_tm.split(":")
-        bot.sendMessage(chat_id, str(a+": "+ temperatura))
+		bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
     elif command == '/humitat':
 		sensor_hm=str(pr.Humidity("Humitat"))
 		a,humitat=sensor_hm.split(":")
-        bot.sendMessage(chat_id, str(a+": "+ temphumitateratura))
+        bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
     elif command == '/rele':
 		if (releStatus == 0)
 			bot.sendMessage(chat_id, str("Cerrando "))
