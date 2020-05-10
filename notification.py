@@ -36,23 +36,28 @@ def handle(msg):
     elif command == '/humitat':
 		sensor_hm=str(pr.Humidity("Humitat"))
 		a,humitat=sensor_hm.split(":")
-	        bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
+	    bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
     elif command == '/rele':
-		if not releStatus:
+		if releStatus:
 			bot.sendMessage(chat_id, str("Cerrando "))
 			GPIO.output(releCtrl, False)
-			releStatus = True
+			changeReleState (releStatus)
 		else:
 			bot.sendMessage(chat_id, str("Abriendo "))
 			GPIO.output(releCtrl, True)
-			releStatus =  False
+			changeReleState (releStatus)
 # Insert your telegram token below
 bot = telepot.Bot('1075608346:AAGw8vhREx5WAMmV3aQpclk5yKjYWzn9qiI')
 print (bot.getMe())
 def relehandler(releStatus):
 	releStatus != releStatus
 	return releStatus
-	
+def changeReleState(releStatus):
+	if releStatus == True:
+		releStatus = False
+	else:
+		releStatus = True
+	return releStatus
 # Start listening to the telegram bot and whenever a message is  received, the handle function will be called.
 MessageLoop(bot, handle).run_as_thread()
 print ('Listening....')
