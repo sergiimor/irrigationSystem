@@ -8,7 +8,7 @@ import main as pr
 releCtrl = 21
 
 #Rele OFF state
-releStatus = False 
+releStatus = 0 
 now = datetime.datetime.now() # Getting date and time
 
 GPIO.setmode(GPIO.BCM)      # Use Board pin numbering
@@ -38,9 +38,9 @@ def handle(msg):
 		a,humitat=sensor_hm.split(":")
 	    bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
     elif command == '/rele':
-		if releStatus:
+		if releStatus == 1:
 			bot.sendMessage(chat_id, str("Cerrando "))
-			GPIO.output(releCtrl, False)
+			GPIO.output(releCtrl, True)
 			changeReleState (releStatus)
 			print "is releStatus is true" + releStatus
 		else:
@@ -55,10 +55,10 @@ def relehandler(releStatus):
 	releStatus != releStatus
 	return releStatus
 def changeReleState(releStatus):
-	if releStatus == True:
-		releStatus = False
+	if releStatus == 0:
+		releStatus = 1
 	else:
-		releStatus = True
+		releStatus = 0
 	return releStatus
 # Start listening to the telegram bot and whenever a message is  received, the handle function will be called.
 MessageLoop(bot, handle).run_as_thread()
