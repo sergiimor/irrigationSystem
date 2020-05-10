@@ -36,7 +36,7 @@ def handle(msg):
     elif command == '/humitat':
 		sensor_hm=str(pr.Humidity("Humitat"))
 		a,humitat=sensor_hm.split(":")
-	    bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
+		bot.sendMessage(chat_id, str(a) + str (": ") + str(humitat))
     elif command == '/rele':
 		if releStatus == 1:
 			bot.sendMessage(chat_id, str("Cerrando "))
